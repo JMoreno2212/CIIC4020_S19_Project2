@@ -16,7 +16,7 @@ public class SortedCircularDoublyLinkedList<E extends Comparable<E>> implements 
 
 	@Override
 	public Iterator<E> iterator() {
-		return new SortedListForwardIterator<>();
+		return new SortedListForwardIterator<>(this);
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class SortedCircularDoublyLinkedList<E extends Comparable<E>> implements 
 
 	@Override
 	public Iterator<E> iterator(int index) {
-		return new SortedListForwardIterator<>(index);
+		return new SortedListForwardIterator<>(this, index);
 	}
 
 	@Override
@@ -114,12 +114,12 @@ public class SortedCircularDoublyLinkedList<E extends Comparable<E>> implements 
 
 	@Override
 	public ReverseIterator<E> reverseIterator() {
-		return new SortedListReverseIterator<>();
+		return new SortedListReverseIterator<>(this);
 	}
 
 	@Override
 	public ReverseIterator<E> reverseIterator(int index) {
-		return new SortedListReverseIterator<>(index);
+		return new SortedListReverseIterator<>(this, index);
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class SortedCircularDoublyLinkedList<E extends Comparable<E>> implements 
 
 	///////////////////////////////// INTERNAL NODE CLASS /////////////////////////////////
 	/**
-	 * Node used for the Doubly Linked List.
+	 * Node used for the Sorted Doubly Linked List.
 	 * @param <E> - the type of data stored in the node
 	 */
 	public static class Node<E> {
@@ -184,17 +184,19 @@ public class SortedCircularDoublyLinkedList<E extends Comparable<E>> implements 
 		private int current;
 
 		/**
-		 * This constructor starts traversing the list forwardly at the beginning.
+		 * This iterator starts traversing the list forwardly at the beginning.
 		 */
-		public SortedListForwardIterator() {
+		public SortedListForwardIterator(SortedList<E> list) {
+			this.list = list;
 			this.start = 0;
 			this.current = 0;
 		}
 		/**
-		 * This constructor allows you to choose the starting index of the forward iterator.
+		 * This iterator allows you to choose the starting index of the forward iterator.
 		 * @param index - the initial index of your iterator
 		 */
-		public SortedListForwardIterator(int index) {
+		public SortedListForwardIterator(SortedList<E> list, int index) {
+			this.list = list;
 			this.start = index;
 			this.current = index;
 		}
@@ -224,17 +226,19 @@ public class SortedCircularDoublyLinkedList<E extends Comparable<E>> implements 
 		private int current;
 
 		/**
-		 * This constructor starts traversing the list reversely at the beginning if it.
+		 * This iterator starts traversing the list reversely at the beginning if it.
 		 */
-		public SortedListReverseIterator() {
+		public SortedListReverseIterator(SortedList<E> list) {
+			this.list = list;
 			this.start = 0;
 			this.current = 0;
 		}
 		/**
-		 * This constructor allows you to choose the starting index of the reverse iterator.
+		 * This iterator allows you to choose the starting index of the reverse iterator.
 		 * @param index - the initial index of your iterator
 		 */
-		public SortedListReverseIterator(int index) {
+		public SortedListReverseIterator(SortedList<E> list, int index) {
+			this.list = list;
 			this.start = index;
 			this.current = index;
 		}
