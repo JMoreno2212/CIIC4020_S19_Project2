@@ -43,7 +43,7 @@ public class SortedCircularDoublyLinkedList<E extends Comparable<E>> implements 
 	@Override
 	public boolean remove(E obj) {
 		Node<E> curr = header.getNext();
-		while(curr != null) {
+		while(curr != header) {
 			if(curr.getElement().equals(obj)) {
 				curr.getPrev().setNext(curr.getNext());
 				curr.getNext().setPrev(curr.getPrev());
@@ -127,6 +127,7 @@ public class SortedCircularDoublyLinkedList<E extends Comparable<E>> implements 
 		Node<E> curr = header.getNext();
 		while(curr != header) {
 			if(curr.getElement().equals(e)) return true;
+			curr = curr.getNext();
 		}
 		return false;
 	}
@@ -179,7 +180,7 @@ public class SortedCircularDoublyLinkedList<E extends Comparable<E>> implements 
 	 * @throws IndexOutOfBoundsException when index is not valid within the list
 	 */
 	private int isValid(int index) throws IndexOutOfBoundsException {
-		if(index < 0 || index > this.size()) throw new IndexOutOfBoundsException("Number " + index + " is not a valid index.");
+		if(index < 0 || index > this.size() - 1) throw new IndexOutOfBoundsException("Number " + index + " is not a valid index.");
 		return index;
 	}
 
