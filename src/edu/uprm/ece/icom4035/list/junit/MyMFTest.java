@@ -2,7 +2,7 @@ package edu.uprm.ece.icom4035.list.junit;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +49,7 @@ public class MyMFTest {
 		assertFalse(L.contains("Bienve"));
 		assertTrue(L.add("Bienve"));
 		
-		// Chapter 3 - Pedrito's Tests
+		// Chapter 3 - Pedrito implements Comparable
 		L.add("");
 		assertTrue(L.first() == "");
 		L.add("Pedro");
@@ -59,12 +59,23 @@ public class MyMFTest {
 		assertTrue(L.get(5) == "PedroA");
 		assertTrue(L.get(6) == "PedroB");
 	
-		try {
-			L.get(L.size());
-			fail(); // Exception wasn't thrown properly
-		} catch (IndexOutOfBoundsException e) {
-			assertTrue(true); // Exception properly thrown
-		}
+		// This only works with JUnit 4	
+//		try {
+//			L.get(L.size());
+//			fail(); // Exception wasn't thrown properly
+//		} catch (IndexOutOfBoundsException e) {
+//			assertTrue(true); // Exception properly thrown
+//		}
+		
+		// This only works with JUnit 5
+		assertThrows(IndexOutOfBoundsException.class, () -> L.get(L.size()));
+		
+		
+		
+		// Chapter 4 - Manuel implements Iterable
+		
+		// Chapter 5 - The approval
+		
 	}
 
 }

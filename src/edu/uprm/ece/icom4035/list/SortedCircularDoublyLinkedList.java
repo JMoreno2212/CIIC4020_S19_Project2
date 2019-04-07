@@ -178,6 +178,7 @@ public class SortedCircularDoublyLinkedList<E extends Comparable<E>> implements 
 	 * that it will be worked on.
 	 * @param index - the index that will be verified
 	 * @throws IndexOutOfBoundsException when index is not valid within the list
+	 * @return The verified and ready to use index
 	 */
 	private int isValid(int index) throws IndexOutOfBoundsException {
 		if(index < 0 || index > this.size() - 1) throw new IndexOutOfBoundsException("Number " + index + " is not a valid index.");
